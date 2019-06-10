@@ -1,0 +1,41 @@
+const int btn_pin = 2;
+const int led_pin = 6;
+
+    // We need to remember the previous button state between loops
+    int btn_prev = HIGH;
+  
+    //Remember the LED state between loops
+    int led_state = LOW;
+
+ 
+void setup() {
+    pinMode (btn_pin, INPUT); // set the button pin as INPUT
+    pinMode (led_pin, OUTPUT); // set the LED pin as OUTPUT
+  
+    //Set LED to default off
+    digitalWrite (led_pin, led_state);
+}
+
+
+void loop() {
+  
+    int btn_state;
+  
+    //Read current button state
+    btn_state = digitalRead (btn_pin);
+  
+    //If the button was previously HIGH and now LOW, its has been presssed
+    if ( (btn_prev == HIGH) && (btn_state == LOW) ) {
+
+          //Toggle LED
+          if (led_state == LOW) {
+              led_state = HIGH;
+          } else {
+              led_state = LOW;
+          }
+          digitalWrite (led_pin, led_state);
+   }
+
+     btn_prev = btn_state;
+
+}
